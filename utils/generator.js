@@ -8,6 +8,13 @@ const generateErrorMessage = message => {
 	}
 }
 
+const generateSuccessMessage = message => {
+	return {
+		status: 200,
+		message,
+	}
+}
+
 const generateToken = user => {
 	return jwt.sign({
 		id: user.id,
@@ -16,4 +23,4 @@ const generateToken = user => {
 	}, process.env.JWT_KEY, { expiresIn: '1h' });
 }
 
-module.exports = { generateErrorMessage, generateToken }
+module.exports = { generateErrorMessage, generateSuccessMessage, generateToken, }
