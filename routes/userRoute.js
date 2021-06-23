@@ -12,3 +12,5 @@ router.post('/login', (req, res) => {
 router.put('/update', (req, res) => {
 	// update user
 });
+
+module.exports = router;

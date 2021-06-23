@@ -20,3 +20,5 @@ router.post('/new', (req, res) => {
 router.delete('/:id', (req, res) => {
 	// delete blog
 });
+
+module.exports = router;
