@@ -38,6 +38,43 @@ module.exports = {
 
 			}
 		});
+	},
+
+	login: ({ username, password }) => {
+		return new Promise(async (resolve, reject) => {
+
+			try {
+
+				const user = await User.findOne({ username });
+
+				if (!user) reject(generateErrorMessage('No such user'));
+
+				const match = await bcrypt.compare(password, user.password);
+
+				if (!match) reject(generateErrorMessage('Incorrect password'));
+
+				const token = generateToken({
+					...user._doc,
+					id: user._id
+				});
+
+				const data = {
+					username: user.username,
+					name: user.name,
+					id: user._id,
+					token
+				}
+
+				resolve(data);
+
+			} catch (err) {
+
+				console.log(`[-] FAILED TO LOGIN USER`)
+				reject(generateErrorMessage(err.message))
+
+			}
+
+		});
 	}
 
 }
