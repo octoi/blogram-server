@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { register, login } = require('../mongo/userHelper');
+const { register, login, update } = require('../mongo/userHelper');
 const { generateSuccessMessage } = require('../utils/generator');
 
 router.post('/register', (req, res) => {
@@ -20,7 +20,11 @@ router.post('/login', (req, res) => {
 });
 
 router.put('/update', (req, res) => {
-	// update user
+
+	update(req.body)
+		.then(user => res.json(generateSuccessMessage(user)))
+		.catch(err => res.json(err))
+
 });
 
 module.exports = router;
