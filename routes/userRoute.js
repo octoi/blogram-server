@@ -1,7 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const { register, login, update } = require('../mongo/userHelper');
+const { get, register, login, update } = require('../mongo/userHelper');
 const { generateSuccessMessage } = require('../utils/generator');
+
+
+router.get('/:id', (req, res) => {
+
+	const id = req.params.id;
+
+	get(id)
+		.then(user => res.json(generateSuccessMessage(user)))
+		.catch(err => res.json(err))
+
+});
 
 router.post('/register', (req, res) => {
 
