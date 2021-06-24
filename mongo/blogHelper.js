@@ -17,6 +17,24 @@ module.exports = {
 
 			}
 		});
+	},
+
+	fetchOne: (id) => {
+		return new Promise(async (resolve, reject) => {
+			try {
+
+				const blog = await Blog.findById(id)
+				resolve(blog);
+
+			} catch (err) {
+
+				console.log(err)
+
+				console.log(`[-] FAILED TO FETCH BLOG WITH ID ${id}`);
+				reject(generateErrorMessage('Failed to fetch blog !'));
+
+			}
+		});
 	}
 
 }
