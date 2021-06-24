@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { generateSuccessMessage } = require("../utils/generator");
-const { fetchAll } = require('../mongo/blogHelper');
+const { fetchAll, fetchOne } = require('../mongo/blogHelper');
 
 router.get('/', (req, res) => {
 
@@ -12,7 +12,13 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-	// send a specific blog
+
+	const id = req.params.id;
+
+	fetchOne(id)
+		.then(blog => res.send(generateSuccessMessage(blog)))
+		.catch(err => res.json(err))
+
 });
 
 router.get('/user/:user', (req, res) => {
