@@ -1,24 +1,52 @@
 const express = require("express");
 const router = express.Router();
+const { generateSuccessMessage } = require("../utils/generator");
+const { fetchAll, fetchOne, fetchUserBlog, create, deleteBlog } = require('../mongo/blogHelper');
 
 router.get('/', (req, res) => {
-	// send all blogs
+
+	fetchAll()
+		.then(blogs => res.json(generateSuccessMessage(blogs)))
+		.catch(err => res.json(err))
+
 })
 
 router.get('/:id', (req, res) => {
-	// send a specific blog
+
+	const id = req.params.id;
+
+	fetchOne(id)
+		.then(blog => res.send(generateSuccessMessage(blog)))
+		.catch(err => res.json(err))
+
 });
 
 router.get('/user/:user', (req, res) => {
-	// send all blogs of an user
+
+	const user = req.params.user;
+
+	fetchUserBlog(user)
+		.then(blog => res.send(generateSuccessMessage(blog)))
+		.catch(err => res.json(err))
+
 });
 
 router.post('/new', (req, res) => {
-	// create new blog
+
+	create(req.body)
+		.then((blog) => res.send(generateSuccessMessage(blog)))
+		.catch(err => res.json(err))
+
 });
 
 router.delete('/:id', (req, res) => {
-	// delete blog
+
+	const id = req.params.id;
+
+	deleteBlog(id)
+		.then((msg) => res.send(generateSuccessMessage(msg)))
+		.catch(err => res.json(err))
+
 });
 
 module.exports = router;
