@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { generateSuccessMessage } = require("../utils/generator");
-const { fetchAll, fetchOne } = require('../mongo/blogHelper');
+const { fetchAll, fetchOne, create } = require('../mongo/blogHelper');
 
 router.get('/', (req, res) => {
 
@@ -26,7 +26,11 @@ router.get('/user/:user', (req, res) => {
 });
 
 router.post('/new', (req, res) => {
-	// create new blog
+
+	create(req.body)
+		.then((blog) => res.send(generateSuccessMessage(blog)))
+		.catch(err => res.json(err))
+
 });
 
 router.delete('/:id', (req, res) => {
