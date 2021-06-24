@@ -4,6 +4,31 @@ const { generateErrorMessage, generateToken } = require('../utils/generator');
 
 module.exports = {
 
+	get: (id) => {
+		return new Promise(async (resolve, reject) => {
+			try {
+
+				const userRes = await User.findById(id);
+
+				if (!userRes) reject(generateErrorMessage('Mo such user'));
+
+				const data = {
+					username: userRes.username,
+					name: userRes.name,
+					id: userRes._id,
+				}
+
+				resolve(data);
+
+			} catch (err) {
+
+				console.log(`[-] FAILED TO FETCH USER ${id}`)
+				reject(generateErrorMessage(err.message))
+
+			}
+		});
+	},
+
 	register: ({ username, name, password }) => {
 		return new Promise(async (resolve, reject) => {
 			try {
