@@ -38,6 +38,22 @@ module.exports = {
 		});
 	},
 
+	fetchUserBlog: (user) => {
+		return new Promise(async (resolve, reject) => {
+			try {
+
+				const blogs = await Blog.find({ user });
+				resolve(blogs);
+
+			} catch (err) {
+
+				console.log(`[-] FAILED TO FETCH BLOGS OF ${user}`);
+				reject(generateErrorMessage('Failed to fetch blogs !'));
+
+			}
+		});
+	},
+
 	create: ({ title, blog, username, password }) => {
 		return new Promise((resolve, reject) => {
 			try {
