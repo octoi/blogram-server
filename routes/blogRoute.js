@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { generateSuccessMessage } = require("../utils/generator");
-const { fetchAll, fetchOne, fetchUserBlog, create } = require('../mongo/blogHelper');
+const { fetchAll, fetchOne, fetchUserBlog, create, deleteBlog } = require('../mongo/blogHelper');
 
 router.get('/', (req, res) => {
 
@@ -40,7 +40,13 @@ router.post('/new', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-	// delete blog
+
+	const id = req.params.id;
+
+	deleteBlog(id)
+		.then((msg) => res.send(generateSuccessMessage(msg)))
+		.catch(err => res.json(err))
+
 });
 
 module.exports = router;
