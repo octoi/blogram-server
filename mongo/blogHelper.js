@@ -42,7 +42,7 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			try {
 
-				login(username, password)
+				login({ username, password })
 					.catch((err) => reject(generateErrorMessage(err.message)))
 					.then(async (userData) => {
 
@@ -59,7 +59,7 @@ module.exports = {
 
 						const data = {
 							title: blogRes.title,
-							blog: blogRes.description,
+							blog: blogRes.blog,
 							id: blogRes._id,
 							createdAt: blogRes.createdAt,
 							user: blogRes.user,
