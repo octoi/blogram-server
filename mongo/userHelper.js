@@ -24,9 +24,9 @@ module.exports = {
 				});
 
 				const data = {
-					username: user.username,
-					name: user.name,
-					id: user._id,
+					username: userRes.username,
+					name: userRes.name,
+					id: userRes._id,
 					token
 				}
 
