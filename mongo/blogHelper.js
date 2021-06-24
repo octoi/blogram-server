@@ -92,6 +92,32 @@ module.exports = {
 
 			}
 		});
+	},
+
+	deleteBlog: (id) => {
+		return new Promise(async (resolve, reject) => {
+			try {
+
+				module.exports.fetchOne(id).then(async (blog) => {
+
+					await Blog.deleteOne({ _id: id });
+					resolve('Deleted')
+
+				}).catch(err => {
+
+					reject(generateErrorMessage('No such blog'))
+
+				})
+
+			} catch (err) {
+
+				console.log(err)
+
+				console.log(`[-] FAILED TO FETCH BLOG WITH ID ${id}`);
+				reject(generateErrorMessage('Failed to fetch blog !'));
+
+			}
+		});
 	}
 
 }
