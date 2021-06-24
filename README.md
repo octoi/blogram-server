@@ -2,6 +2,8 @@
 
 Rest api for blogram [ or any other apps ] 😉
 
+This project is made using __Node Js, Mongo Db & Much more__
+
 ## SETUP 👷‍♂️
 
 > You need __MONGO DB, NODE JS & NPM__ to run this project 
@@ -25,6 +27,12 @@ $ yarn start
 ## DOCUMENTATION 📚
 
 ### User 👤
+
+<b><u>FETCH USER  DATA [ GET ]</u></b>
+
+`/user/:userId`: get user data with ID
+
+> You will get ID of user by login, register or update
 
 <b><u>REGISTER [ POST ]</u></b>
 
@@ -74,3 +82,35 @@ $ yarn start
 }
 ```
 
+### Blog 📝
+
+<b><u>GET ALL BLOGS [ GET ]</u></b>
+
+`/blog`: get all blogs
+
+<b><u>GET SINGLE BLOG [ GET ]</u></b>
+
+`/blog/:blogId`: get blog with ID
+
+<b><u>GET ALL BLOG OF USER [ GET ]</u></b>
+
+`/blog/:userId`: get all blogs of user with USER ID
+
+<b><u>NEW BLOG [ POST ]</u></b>
+
+`/blog/new`: create new blog
+
+> You should include following in request body
+
+```json
+{
+    "username": "username of user",
+    "password": "password of user",
+    "title": "title of blog",
+    "blog": "blog content"
+}
+```
+
+<b><u>DELETE BLOG [ DELETE ]</u></b>
+
+`/blog/delete/:blogId`: delete blog with id
