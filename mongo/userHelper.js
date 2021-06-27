@@ -35,7 +35,10 @@ module.exports = {
 
 				const oldUser = await User.findOne({ username });
 
-				if (oldUser) reject(generateErrorMessage('There is an user with same username'));
+				if (oldUser) {
+					reject(generateErrorMessage('There is an user with same username'));
+					return;
+				}
 
 				password = await bcrypt.hash(password, 12); // hashing password
 
