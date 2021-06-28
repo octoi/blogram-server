@@ -94,29 +94,33 @@ module.exports = {
 		});
 	},
 
-	deleteBlog: (id) => {
+	deleteBlog: (userData, id) => {
 		return new Promise(async (resolve, reject) => {
-			try {
+			login(userData).then(() => {
 
-				module.exports.fetchOne(id).then(async (blog) => {
+				try {
+					module.exports.fetchOne(id).then(async (blog) => {
 
-					await Blog.deleteOne({ _id: id });
-					resolve('Deleted')
 
-				}).catch(err => {
+						await Blog.deleteOne({ _id: id });
+						resolve('Deleted')
 
-					reject(generateErrorMessage('No such blog'))
+					}).catch(err => {
 
-				})
+						reject(generateErrorMessage('No such blog'))
 
-			} catch (err) {
+					})
 
-				console.log(err)
+				} catch (err) {
 
-				console.log(`[-] FAILED TO FETCH BLOG WITH ID ${id}`);
-				reject(generateErrorMessage('Failed to fetch blog !'));
+					console.log(err)
 
-			}
+					console.log(`[-] FAILED TO FETCH BLOG WITH ID ${id}`);
+					reject(generateErrorMessage('Failed to fetch blog !'));
+
+				}
+
+			}).catch(err => reject(generateErrorMessage(err)));
 		});
 	}
 
