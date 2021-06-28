@@ -104,8 +104,8 @@ $ yarn start
 
 ```json
 {
-    "username": "username of user",
-    "password": "password of user",
+    "username": "username",
+    "password": "userpassword",
     "title": "title of blog",
     "blog": "blog content"
 }
@@ -114,3 +114,13 @@ $ yarn start
 <b><u>DELETE BLOG [ DELETE ]</u></b>
 
 `/blog/delete/:blogId`: delete blog with id
+
+> You need to have following body in request
+
+```json
+{
+    "username": "username",
+    "password": "user password"
+}
+```
+

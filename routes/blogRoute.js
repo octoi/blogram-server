@@ -43,7 +43,7 @@ router.delete('/:id', (req, res) => {
 
 	const id = req.params.id;
 
-	deleteBlog(id)
+	deleteBlog(req.body, id)
 		.then((msg) => res.send(generateSuccessMessage(msg)))
 		.catch(err => res.json(err))
 
