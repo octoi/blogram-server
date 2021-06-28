@@ -104,7 +104,8 @@ $ yarn start
 
 ```json
 {
-    "user": "user id",
+    "username": "username",
+    "password": "userpassword",
     "title": "title of blog",
     "blog": "blog content"
 }
