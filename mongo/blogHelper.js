@@ -1,6 +1,6 @@
 const Blog = require('../models/blogModel');
 const { generateErrorMessage } = require('../utils/generator');
-const { login } = require('./userHelper');
+const { login, get: getUserData } = require('./userHelper');
 
 module.exports = {
 
@@ -54,12 +54,11 @@ module.exports = {
 		});
 	},
 
-	create: ({ title, blog, username, password }) => {
+	create: ({ title, blog, user }) => {
 		return new Promise((resolve, reject) => {
 			try {
 
-				login({ username, password })
-					.catch((err) => reject(generateErrorMessage(err.message)))
+				getUserData(user)
 					.then(async (userData) => {
 
 						if (!userData) return;
@@ -83,7 +82,8 @@ module.exports = {
 
 						resolve(data);
 
-					});
+					})
+					.catch((err) => reject(generateErrorMessage(err.message)))
 
 			} catch (err) {
 
