@@ -1,6 +1,6 @@
 const Blog = require('../models/blogModel');
 const { generateErrorMessage } = require('../utils/generator');
-const { login, get: getUserData } = require('./userHelper');
+const { login } = require('./userHelper');
 
 module.exports = {
 
@@ -54,11 +54,11 @@ module.exports = {
 		});
 	},
 
-	create: ({ title, blog, user }) => {
+	create: ({ title, blog, username, password }) => {
 		return new Promise((resolve, reject) => {
 			try {
 
-				getUserData(user)
+				login({ username, password })
 					.then(async (userData) => {
 
 						if (!userData) return;
